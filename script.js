@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let expenses = JSON.parse(localStorage.getItem("expense")) || [];
     let totalAmount = calculateTotal();
 
+    renderExpenses();
+    updateTotal();
+
     expenseForm.addEventListener("submit", (e) => {
         e.preventDefault();
         let name = expenseNameInput.value.trim();
@@ -23,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
             expenseNameInput.value = "";
             expenseAmountInput.value = "";
             addToLocalStorage();
-            //renderExpenses();
+            renderExpenses();
             updateTotal();
         }
     })
@@ -39,5 +42,17 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateTotal (){
         totalAmount = calculateTotal();
         totalAmountDisplay.textContent = totalAmount.toFixed(2);
+    }
+
+    function renderExpenses() {
+        expenseList.innerHTML = "";
+        expenses.forEach(expense => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+            ${expense.name} - $${expense.amount}
+            <button data-id="${expense.id}">Remove</button>
+            `;
+            expenseList.appendChild(li);
+        });
     }
 })
