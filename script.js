@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const totalAmountDisplay = document.getElementById("total-amount");
 
     let expenses = JSON.parse(localStorage.getItem("expense")) || [];
-    //let totalAmount = calculateTotal();
+    let totalAmount = calculateTotal();
 
     expenseForm.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -23,10 +23,21 @@ document.addEventListener("DOMContentLoaded", function () {
             expenseNameInput.value = "";
             expenseAmountInput.value = "";
             addToLocalStorage();
+            //renderExpenses();
+            updateTotal();
         }
     })
 
     function addToLocalStorage (){
         localStorage.setItem("expense", JSON.stringify(expenses));
+    }
+
+    function calculateTotal (){
+        return expenses.reduce((sum, expense) => sum + expense.amount, 0);
+    }
+
+    function updateTotal (){
+        totalAmount = calculateTotal();
+        totalAmountDisplay.textContent = totalAmount.toFixed(2);
     }
 })
