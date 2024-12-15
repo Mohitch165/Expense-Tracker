@@ -8,3 +8,5 @@
 <li>Remove Expenses</li>
 <li>Calculate Total</li>
 </ul>
+
+<p>Check the tracker at : <a href:" https://mohitch165.github.io/Expense-Tracker/"> https://mohitch165.github.io/Expense-Tracker/</a></p>
